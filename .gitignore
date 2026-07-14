@@ -1,0 +1,100 @@
+# =========================
+# Python / Django
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pdb
+*.egg
+*.egg-info/
+dist/
+build/
+*.manifest
+*.spec
+
+# Ambientes virtuais
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Migrações (opcional — remova se quiser versionar)
+# */migrations/*.py
+# !*/migrations/__init__.py
+
+# =========================
+# Media e Estáticos
+# =========================
+media/
+staticfiles/
+static_collected/
+
+# =========================
+# React / Node.js
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+
+# Build do React
+/frontend/build/
+/frontend/dist/
+/frontend/.next/
+/frontend/out/
+
+# Cache
+.cache/
+.parcel-cache/
+
+# =========================
+# Variáveis de ambiente
+# =========================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+
+# =========================
+# IDEs e Editores
+# =========================
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.DS_Store
+Thumbs.db
+
+# =========================
+# Testes
+# =========================
+coverage/
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# =========================
+# Outros
+# =========================
+*.bak
+*.tmp
+*.temp
