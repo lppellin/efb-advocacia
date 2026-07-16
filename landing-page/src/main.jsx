@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import App1 from './App1';
-import App2 from './App2';
 import App3 from './App3';
 import './index.css';
 
@@ -12,7 +11,7 @@ function Main() {
     <>
       {/* Version Switcher */}
       <div className="fixed bottom-6 right-6 z-[99999] bg-black/80 backdrop-blur-md border border-white/20 p-2 rounded-full flex gap-2 shadow-2xl">
-        {[1, 2, 3].map((v) => (
+        {[1, 3].map((v) => (
           <button
             key={v}
             onClick={() => setVersion(v)}
@@ -26,7 +25,6 @@ function Main() {
       </div>
 
       {version === 1 && <App1 />}
-      {version === 2 && <App2 />}
       {version === 3 && <App3 />}
     </>
   );

@@ -3,6 +3,32 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight, Phone, Mail, MapPin, Scale, Shield, Users, Award } from 'lucide-react';
 
+// ── Ícones de redes sociais como SVG inline (lucide-react v1.24 removeu esses) ──
+const IconInstagram = ({ className }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+    <circle cx="12" cy="12" r="4"/>
+    <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+  </svg>
+);
+const IconLinkedin = ({ className }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+    <rect x="2" y="9" width="4" height="12"/>
+    <circle cx="4" cy="4" r="2"/>
+  </svg>
+);
+const IconFacebook = ({ className }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  </svg>
+);
+const IconWhatsapp = ({ className }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+  </svg>
+);
+
 gsap.registerPlugin(ScrollTrigger);
 
 const AREAS = [
@@ -28,12 +54,11 @@ const AREAS = [
   },
 ];
 
+// Apenas 3 membros visíveis — array pode crescer dinamicamente
 const TEAM = [
   { name: 'Dr. Eduardo Ferreira', role: 'Sócio-fundador', img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400&auto=format&fit=crop' },
   { name: 'Dra. Fernanda Braga', role: 'Sócia — Dir. Civil', img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop' },
   { name: 'Dr. Bruno Almeida', role: 'Associado Sênior', img: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=400&auto=format&fit=crop' },
-  { name: 'Dra. Clara Matos', role: 'Associada — Tributário', img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=400&auto=format&fit=crop' },
-  { name: 'Dr. Rodrigo Lima', role: 'Associado — Trabalhista', img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=400&auto=format&fit=crop' },
 ];
 
 const STATS = [
@@ -43,14 +68,24 @@ const STATS = [
   { value: '340+', label: 'Clientes Ativos' },
 ];
 
-const AWARDS = [
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/OAB_logo.svg/200px-OAB_logo.svg.png',
+const TIMELINE = [
+  { year: '2006', title: 'Fundação', desc: 'EFB Advocacia é fundada com foco em direito empresarial e civil, atendendo empresas locais e regionais.' },
+  { year: '2011', title: 'Expansão', desc: 'Crescimento expressivo leva à abertura de novas especialidades: Tributário, Trabalhista e Direito Internacional.' },
+  { year: '2016', title: 'Reconhecimento Nacional', desc: 'Primeiro reconhecimento pela Análise Advocacia 500 como um dos melhores escritórios do país.' },
+  { year: '2022', title: 'Nova Sede', desc: 'Inauguração da nova sede com espaços modernos e tecnológicos para melhor atender clientes em todo o Brasil.' },
+  { year: 'Hoje', title: 'Referência', desc: '18 anos de história, mais de 2.400 casos concluídos e uma equipe comprometida com a excelência.' },
+];
+
+const SOCIAL = [
+  { icon: IconInstagram, label: 'Instagram', href: '#' },
+  { icon: IconLinkedin, label: 'LinkedIn', href: '#' },
+  { icon: IconFacebook, label: 'Facebook', href: '#' },
+  { icon: IconWhatsapp, label: 'WhatsApp', href: '#' },
 ];
 
 export default function App3() {
   const heroRef = useRef(null);
   const [activeArea, setActiveArea] = useState(0);
-  const [formData, setFormData] = useState({ nome: '', email: '', telefone: '', mensagem: '' });
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -61,12 +96,7 @@ export default function App3() {
         { y: 0, opacity: 1, duration: 1.4, stagger: 0.18, ease: 'power3.out', delay: 0.2 }
       );
 
-      // Navbar scroll behavior
-      ScrollTrigger.create({
-        start: 'top -80',
-        end: 99999,
-        toggleClass: { className: 'nav3-scrolled', targets: '.navbar3' },
-      });
+      // Navbar scroll behavior — removido (fundo fixo)
 
       // Stats counter animation
       gsap.fromTo(
@@ -110,6 +140,20 @@ export default function App3() {
           scrollTrigger: { trigger: '.team-section', start: 'top 70%' },
         }
       );
+
+      // Timeline horizontal items
+      gsap.fromTo(
+        '.timeline-item',
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.15,
+          ease: 'power2.out',
+          scrollTrigger: { trigger: '.timeline-section', start: 'top 75%' },
+        }
+      );
     });
     return () => ctx.revert();
   }, []);
@@ -118,26 +162,29 @@ export default function App3() {
     <div className="relative bg-[#F4F0E8] text-[#1C1C1C] font-sans overflow-x-hidden">
 
       {/* ─── NAVBAR ─── */}
-      <nav className="navbar3 fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 md:px-16 py-5 transition-all duration-400">
-        <div className="font-serif text-2xl font-bold tracking-tight text-[#F4F0E8] [.nav3-scrolled_&]:text-[#1A3A28]">
+      <nav className="navbar3 fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 md:px-16 py-4 bg-[#1A3A28] shadow-md transition-all duration-300">
+        <a href="#home" className="font-serif text-2xl font-bold tracking-tight text-[#F4F0E8]">
           EFB<span className="text-[#B8860B] ml-1">.</span>
-        </div>
-        <div className="hidden md:flex gap-10 text-sm tracking-wide font-medium text-[#F4F0E8]/80 [.nav3-scrolled_&]:text-[#1A3A28]/80">
+        </a>
+        <div className="hidden md:flex gap-8 text-sm tracking-wide font-medium text-[#F4F0E8]/80">
           <a href="#sobre" className="hover:text-[#B8860B] transition-colors duration-200">O Escritório</a>
           <a href="#atuacao" className="hover:text-[#B8860B] transition-colors duration-200">Atuação</a>
           <a href="#equipe" className="hover:text-[#B8860B] transition-colors duration-200">Equipe</a>
+          <a href="#historia" className="hover:text-[#B8860B] transition-colors duration-200">História</a>
           <a href="#contato" className="hover:text-[#B8860B] transition-colors duration-200">Contato</a>
         </div>
+        {/* Botão Contato Direto */}
         <a
           href="#contato"
-          className="btn3-cta hidden md:flex items-center gap-2 px-6 py-2.5 border border-[#F4F0E8]/60 text-[#F4F0E8] text-sm font-semibold rounded-full hover:bg-[#F4F0E8] hover:text-[#1A3A28] transition-all duration-300 [.nav3-scrolled_&]:border-[#1A3A28]/50 [.nav3-scrolled_&]:text-[#1A3A28] [.nav3-scrolled_&]:hover:bg-[#1A3A28] [.nav3-scrolled_&]:hover:text-[#F4F0E8]"
+          className="hidden md:flex items-center gap-2 px-6 py-2.5 bg-[#B8860B] text-[#F4F0E8] text-sm font-semibold rounded-full hover:bg-[#A07808] transition-all duration-300"
         >
-          Fale Conosco
+          Contato Direto
         </a>
       </nav>
 
       {/* ─── HERO ─── */}
       <section
+        id="home"
         ref={heroRef}
         className="relative h-[100dvh] w-full flex flex-col justify-end pb-20 md:pb-28 px-8 md:px-16"
       >
@@ -183,7 +230,7 @@ export default function App3() {
         </div>
 
         {/* Hero bottom bar */}
-        <div className="absolute bottom-0 left-0 right-0 z-10 border-t border-[#F4F0E8]/10">
+        {/* <div className="absolute bottom-0 left-0 right-0 z-10 border-t border-[#F4F0E8]/10">
           <div className="max-w-7xl mx-auto px-8 md:px-16 py-4 flex flex-wrap gap-6 md:gap-12">
             {STATS.map((s, i) => (
               <div key={i} className="flex items-baseline gap-2">
@@ -192,7 +239,7 @@ export default function App3() {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
       </section>
 
       {/* ─── SOBRE / LEAD ─── */}
@@ -329,6 +376,21 @@ export default function App3() {
         </div>
       </section>
 
+      {/* ─── PRÊMIOS / RECONHECIMENTOS ─── */}
+      <section className="py-16 px-8 md:px-16 bg-[#EDE8DC] border-y border-[#1A3A28]/10">
+        <div className="max-w-7xl mx-auto reveal-section">
+          <p className="text-center text-xs font-mono tracking-[0.2em] text-[#6B6B6B] uppercase mb-10">Reconhecimentos & Certificações</p>
+          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16 opacity-60">
+            {['OAB — SP', 'Chambers & Partners', 'Legal 500', 'Análise Advocacia 500', 'IBRADEMP'].map((badge, i) => (
+              <div key={i} className="flex items-center gap-2 px-5 py-2 border border-[#1A3A28]/30 rounded-full">
+                <Award className="w-3.5 h-3.5 text-[#B8860B]" />
+                <span className="text-[#1A3A28] text-xs font-mono font-semibold tracking-wide">{badge}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ─── EQUIPE ─── */}
       <section id="equipe" className="team-section py-24 md:py-36 px-8 md:px-16">
         <div className="max-w-7xl mx-auto">
@@ -342,7 +404,11 @@ export default function App3() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6">
+          {/* Grid dinâmico: adapta automaticamente conforme o número de membros em TEAM */}
+          <div
+            className="grid gap-4 md:gap-6"
+            style={{ gridTemplateColumns: `repeat(${Math.min(TEAM.length, 5)}, minmax(0, 1fr))` }}
+          >
             {TEAM.map((member, i) => (
               <div
                 key={i}
@@ -368,133 +434,73 @@ export default function App3() {
         </div>
       </section>
 
-      {/* ─── PRÊMIOS / RECONHECIMENTOS ─── */}
-      <section className="py-16 px-8 md:px-16 bg-[#EDE8DC] border-y border-[#1A3A28]/10">
-        <div className="max-w-7xl mx-auto reveal-section">
-          <p className="text-center text-xs font-mono tracking-[0.2em] text-[#6B6B6B] uppercase mb-10">Reconhecimentos & Certificações</p>
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16 opacity-60">
-            {/* Award badges as text-based badges since we can't load OAB SVG reliably */}
-            {['OAB — SP', 'Chambers & Partners', 'Legal 500', 'Análise Advocacia 500', 'IBRADEMP'].map((badge, i) => (
-              <div key={i} className="flex items-center gap-2 px-5 py-2 border border-[#1A3A28]/30 rounded-full">
-                <Award className="w-3.5 h-3.5 text-[#B8860B]" />
-                <span className="text-[#1A3A28] text-xs font-mono font-semibold tracking-wide">{badge}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* ─── TIMELINE / HISTÓRIA ─── */}
-      <section className="py-24 md:py-36 px-8 md:px-16">
+      {/* ─── TIMELINE HORIZONTAL / HISTÓRIA ─── */}
+      <section id="historia" className="timeline-section py-24 md:py-36 px-8 md:px-16 overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="reveal-section mb-16">
             <p className="text-xs font-mono tracking-[0.2em] text-[#B8860B] uppercase mb-4">Trajetória</p>
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-[#1A3A28]">Uma história de resultado.</h2>
           </div>
-          <div className="relative">
-            {/* Vertical line */}
-            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-[#1A3A28]/15 -translate-x-1/2" />
-            {[
-              { year: '2006', title: 'Fundação do Escritório', desc: 'EFB Advocacia é fundada com foco em direito empresarial e civil, atendendo empresas locais e regionais.' },
-              { year: '2011', title: 'Expansão da Equipe', desc: 'Crescimento expressivo leva à abertura de novas especialidades: Tributário, Trabalhista e Direito Internacional.' },
-              { year: '2016', title: 'Reconhecimento Nacional', desc: 'Primeiro reconhecimento pela Análise Advocacia 500 como um dos melhores escritórios do país na categoria Empresarial.' },
-              { year: '2022', title: 'Nova Sede & Estrutura', desc: 'Inauguração da nova sede, com espaços modernos e tecnológicos para melhor atender clientes em todo o Brasil.' },
-              { year: 'Hoje', title: 'Referência em Estratégia', desc: '18 anos de história, mais de 2.400 casos concluídos e uma equipe comprometida com a excelência e a confiança.' },
-            ].map((item, i) => (
-              <div key={i} className={`reveal-section relative flex flex-col md:flex-row gap-8 mb-16 ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-                <div className="md:w-1/2 flex md:justify-end pl-10 md:pl-0">
-                  <div className={`max-w-md ${i % 2 === 1 ? 'md:pl-16' : 'md:pr-16'}`}>
-                    <span className="font-mono text-xs text-[#B8860B] tracking-widest">{item.year}</span>
-                    <h3 className="font-serif text-2xl font-bold text-[#1A3A28] mt-1 mb-3">{item.title}</h3>
-                    <p className="text-[#4A4A4A] leading-relaxed text-sm">{item.desc}</p>
+
+          {/* Scroll horizontal wrapper */}
+          <div className="relative overflow-x-auto pb-6 -mx-8 md:-mx-16 px-8 md:px-16">
+            <div className="flex gap-0 min-w-max md:min-w-0 md:grid md:grid-cols-5">
+              {TIMELINE.map((item, i) => (
+                <div
+                  key={i}
+                  className="timeline-item relative flex flex-col w-56 md:w-auto"
+                >
+                  {/* Connector line */}
+                  <div className="flex items-center mb-6">
+                    <div className={`w-3 h-3 rounded-full bg-[#B8860B] border-2 border-[#F4F0E8] shadow z-10 shrink-0 ${i === 0 ? '' : ''}`} />
+                    {i < TIMELINE.length - 1 && (
+                      <div className="flex-1 h-px bg-[#1A3A28]/20 min-w-[60px]" />
+                    )}
+                  </div>
+
+                  {/* Content card */}
+                  <div className="pr-6 md:pr-4">
+                    <span className="font-mono text-xs font-bold text-[#B8860B] tracking-widest block mb-1">{item.year}</span>
+                    <h3 className="font-serif text-lg font-bold text-[#1A3A28] mb-2 leading-snug">{item.title}</h3>
+                    <p className="text-[#4A4A4A] text-sm leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
-                {/* Circle marker */}
-                <div className="absolute left-4 md:left-1/2 top-2 w-3 h-3 bg-[#B8860B] rounded-full -translate-x-1/2 border-2 border-[#F4F0E8] shadow" />
-                <div className="md:w-1/2" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── TESTIMONIAL ─── */}
-      <section className="py-24 px-8 md:px-16 bg-[#1A3A28]">
-        <div className="max-w-4xl mx-auto text-center reveal-section">
-          <p className="font-serif text-3xl md:text-5xl italic text-[#F4F0E8] leading-relaxed mb-8">
-            "A EFB não apenas resolveu nosso problema jurídico — nos deu segurança para crescer sem medo."
-          </p>
-          <div className="flex items-center justify-center gap-4">
-            <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-[#B8860B]">
-              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&auto=format&fit=crop" alt="Cliente" className="w-full h-full object-cover" />
-            </div>
-            <div className="text-left">
-              <p className="text-[#F4F0E8] font-semibold text-sm">Carlos Mendonça</p>
-              <p className="text-[#B8860B] text-xs font-mono">CEO, Grupo Mendonça</p>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── CONTATO ─── */}
-      <section id="contato" className="py-24 md:py-36 px-8 md:px-16">
+      {/* ─── CONTATO + GOOGLE MAPS ─── */}
+      <section id="contato" className="py-24 md:py-36 px-8 md:px-16 bg-[#EDE8DC]">
         <div className="max-w-7xl mx-auto">
           <div className="reveal-section mb-16">
             <p className="text-xs font-mono tracking-[0.2em] text-[#B8860B] uppercase mb-4">Entre em Contato</p>
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-[#1A3A28]">Fale com nossos especialistas.</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24">
-            {/* Form */}
-            <div>
-              <form className="flex flex-col gap-5" onSubmit={(e) => e.preventDefault()}>
-                {[
-                  { id: 'nome', label: 'Nome completo', type: 'text', placeholder: 'Seu nome' },
-                  { id: 'email', label: 'E-mail', type: 'email', placeholder: 'seu@email.com' },
-                  { id: 'telefone', label: 'Telefone', type: 'tel', placeholder: '(11) 99999-9999' },
-                ].map((field) => (
-                  <div key={field.id} className="flex flex-col gap-2">
-                    <label htmlFor={field.id} className="text-xs font-mono tracking-wider text-[#6B6B6B] uppercase">
-                      {field.label}
-                    </label>
-                    <input
-                      id={field.id}
-                      type={field.type}
-                      placeholder={field.placeholder}
-                      className="bg-transparent border-b-2 border-[#1A3A28]/25 focus:border-[#B8860B] outline-none py-3 text-[#1C1C1C] text-sm placeholder:text-[#A0A0A0] transition-colors duration-200"
-                      value={formData[field.id]}
-                      onChange={(e) => setFormData({ ...formData, [field.id]: e.target.value })}
-                    />
-                  </div>
-                ))}
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="mensagem" className="text-xs font-mono tracking-wider text-[#6B6B6B] uppercase">
-                    Mensagem
-                  </label>
-                  <textarea
-                    id="mensagem"
-                    rows={4}
-                    placeholder="Descreva brevemente o seu caso..."
-                    className="bg-transparent border-b-2 border-[#1A3A28]/25 focus:border-[#B8860B] outline-none py-3 text-[#1C1C1C] text-sm placeholder:text-[#A0A0A0] transition-colors duration-200 resize-none"
-                    value={formData.mensagem}
-                    onChange={(e) => setFormData({ ...formData, mensagem: e.target.value })}
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="btn-magnetic mt-2 bg-[#1A3A28] text-[#F4F0E8] px-8 py-4 rounded-full font-semibold text-sm hover:bg-[#0D1F18] transition-colors duration-300 flex items-center gap-2 w-fit"
-                >
-                  Enviar Mensagem
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </form>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+            {/* Google Maps Widget */}
+            <div className="reveal-section rounded-2xl overflow-hidden shadow-xl h-[420px] md:h-full min-h-[420px]">
+              <iframe
+                title="Localização EFB Advocacia"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.0976924676867!2d-46.65454652376957!3d-23.56481026143703!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8da0aa315%3A0xd59f9431f2c9776a!2sAv.%20Paulista%2C%20S%C3%A3o%20Paulo%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1718300000000!5m2!1spt-BR!2sbr"
+                width="100%"
+                height="100%"
+                style={{ border: 0, minHeight: '420px' }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
+
             {/* Info */}
-            <div className="flex flex-col gap-10">
-              <div>
-                <p className="text-sm text-[#4A4A4A] leading-relaxed mb-8">
-                  Estamos prontos para atender você. Entre em contato por telefone, e-mail ou preencha o formulário para agendar uma consulta com um de nossos especialistas.
-                </p>
-              </div>
+            <div className="flex flex-col gap-10 justify-center">
+              <p className="text-sm text-[#4A4A4A] leading-relaxed">
+                Estamos prontos para atender você. Entre em contato por telefone, e-mail ou visite nosso escritório para agendar uma consulta com um de nossos especialistas.
+              </p>
+
               {[
                 { icon: Phone, label: 'Telefone', value: '+55 (11) 3000-0000', href: 'tel:+551130000000' },
                 { icon: Mail, label: 'E-mail', value: 'contato@efbadvocacia.com.br', href: 'mailto:contato@efbadvocacia.com.br' },
@@ -503,7 +509,7 @@ export default function App3() {
                 const Icon = item.icon;
                 return (
                   <a key={i} href={item.href} className="group flex gap-4 items-start hover:text-[#B8860B] transition-colors duration-200">
-                    <div className="w-10 h-10 rounded-full border border-[#1A3A28]/20 flex items-center justify-center group-hover:border-[#B8860B] transition-colors">
+                    <div className="w-10 h-10 rounded-full border border-[#1A3A28]/20 flex items-center justify-center group-hover:border-[#B8860B] transition-colors shrink-0">
                       <Icon className="w-4 h-4 text-[#B8860B]" />
                     </div>
                     <div>
@@ -515,11 +521,20 @@ export default function App3() {
               })}
 
               {/* Hours */}
-              <div className="pt-6 border-t border-[#1A3A28]/10">
+              <div className="pt-6 border-t border-[#1A3A28]/15">
                 <p className="text-xs font-mono text-[#6B6B6B] uppercase tracking-wider mb-3">Horário de Atendimento</p>
                 <p className="text-sm text-[#1C1C1C]">Segunda a Sexta — 9h às 18h</p>
                 <p className="text-sm text-[#1C1C1C]">Sábados — 9h às 12h (com agendamento)</p>
               </div>
+
+              {/* CTA */}
+              <a
+                href="tel:+551130000000"
+                className="inline-flex items-center gap-2 bg-[#1A3A28] text-[#F4F0E8] px-8 py-4 rounded-full font-semibold text-sm hover:bg-[#0D1F18] transition-colors duration-300 w-fit"
+              >
+                <Phone className="w-4 h-4" />
+                Ligar Agora
+              </a>
             </div>
           </div>
         </div>
@@ -537,18 +552,33 @@ export default function App3() {
               <p className="text-[#F4F0E8]/50 text-sm leading-relaxed max-w-xs mb-8">
                 Advocacia de excelência com tradição e visão estratégica para resultados que transformam vidas e negócios.
               </p>
-              <div className="flex items-center gap-3 px-4 py-2 bg-[#F4F0E8]/5 rounded-full w-fit border border-[#F4F0E8]/10">
-                <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                <span className="font-mono text-xs text-[#F4F0E8]/60">Sistema Online</span>
+              {/* Ícones de redes sociais */}
+              <div className="flex items-center gap-3">
+                {SOCIAL.map(({ icon: Icon, label, href }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    aria-label={label}
+                    className="w-9 h-9 rounded-full bg-[#F4F0E8]/8 border border-[#F4F0E8]/15 flex items-center justify-center hover:bg-[#B8860B] hover:border-[#B8860B] transition-all duration-300 group"
+                  >
+                    <Icon className="w-4 h-4 text-[#F4F0E8]/60 group-hover:text-[#F4F0E8] transition-colors" />
+                  </a>
+                ))}
               </div>
             </div>
             {/* Navigation */}
             <div>
               <h4 className="text-xs font-mono text-[#B8860B] uppercase tracking-widest mb-6">Navegação</h4>
               <div className="flex flex-col gap-3">
-                {['O Escritório', 'Áreas de Atuação', 'Nossa Equipe', 'Publicações', 'Contato'].map((link) => (
-                  <a key={link} href="#" className="text-[#F4F0E8]/60 text-sm hover:text-[#F4F0E8] transition-colors">
-                    {link}
+                {[
+                  { label: 'O Escritório', href: '#sobre' },
+                  { label: 'Áreas de Atuação', href: '#atuacao' },
+                  { label: 'Nossa Equipe', href: '#equipe' },
+                  { label: 'História', href: '#historia' },
+                  { label: 'Contato', href: '#contato' },
+                ].map(({ label, href }) => (
+                  <a key={label} href={href} className="text-[#F4F0E8]/60 text-sm hover:text-[#F4F0E8] transition-colors">
+                    {label}
                   </a>
                 ))}
               </div>

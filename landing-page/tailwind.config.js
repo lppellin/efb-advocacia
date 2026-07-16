@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        // App1 / App2 tokens (dark theme)
+        // App1 tokens (dark theme)
         background: '#0D0D12',
         primary: '#FAF8F5',
         accent: '#C9A84C',
