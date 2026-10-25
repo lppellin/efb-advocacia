@@ -2,7 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-dark: 32 32 32;
+  --color-dark-deep: 20 20 20;
+  --color-accent: 182 182 182;
+  --color-accent-hover: 160 160 160;
+}
+
+.theme-v3 {
+  --color-dark: 32 32 32;
+  --color-dark-deep: 20 20 20;
+  --color-accent: 182 182 182;
+  --color-accent-hover: 160 160 160;
+}
+
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
   body {
     @apply bg-background text-primary font-sans antialiased overflow-x-hidden;
   }
@@ -29,7 +47,7 @@
   @apply bg-background;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-dark rounded-full;
+  @apply bg-dark/30 rounded-full hover:bg-dark/50 transition-colors;
 }
 
 /* Utility for magnetic buttons */
