@@ -80,6 +80,8 @@ const AREAS = [
   },
 ];
 
+const asset = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
+
 // Apenas 3 membros visíveis — array pode crescer dinamicamente
 const TEAM = [
   {
@@ -87,19 +89,19 @@ const TEAM = [
     role: 'Advogado titular',
     sub: 'OAB/SC 009562',
     description: 'Graduado em Direito pela Universidade Regional de Blumenau (FURB) no ano de 1993, aprofundou sua qualificação por meio de pós-graduações em Direito Civil e Processo Civil, exercendo a advocacia de forma autônoma e empresarial desde 1995.',
-    img: '/assets/foto-evair.jpeg',
+    img: asset('assets/foto-evair.jpeg'),
   },
   {
     name: 'Marla Lindorfer dos Reis',
     role: 'Assistente Jurídico II',
     description: 'Graduada em Direito pela Unijuí.',
-    img: '/assets/foto-marla.jpeg',
+    img: asset('assets/foto-marla.jpeg'),
   },
   {
     name: 'Ana Júlia Bona',
     role: 'Assistente Jurídico',
     description: 'Graduanda em Direito pela PUCPR',
-    img: '/assets/foto-ana.png',
+    img: asset('assets/foto-ana.png'),
   },
 ];
 
@@ -254,7 +256,7 @@ export default function App() {
         {/* Imagem EFB_OK (posicionada na parte inferior direita, sobre o fundo, próxima ao WhatsApp) */}
         <div className="h3-anim absolute bottom-20 right-4 sm:bottom-24 sm:right-6 md:bottom-24 md:right-10 z-10 pointer-events-none select-none">
           <img
-            src="/assets/EFB_OK.png"
+            src={asset('assets/EFB_OK.png')}
             alt="EFB Advocacia"
             className="w-36 sm:w-56 md:w-72 lg:w-80 xl:w-96 h-auto drop-shadow-[0_10px_25px_rgba(0,0,0,0.6)]"
           />
@@ -635,7 +637,7 @@ export default function App() {
             {/* Imagem EFB_OK no canto direito */}
             <div className="flex items-center justify-start md:justify-end shrink-0">
               <img
-                src="/assets/EFB_OK.png"
+                src={asset('assets/EFB_OK.png')}
                 alt="EFB Advocacia"
                 className="w-48 sm:w-56 md:w-56 lg:w-64 h-auto drop-shadow-xl -mt-4 md:-mt-6"
               />
