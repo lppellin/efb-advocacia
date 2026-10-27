@@ -30,7 +30,7 @@ export default {
       },
       animation: {
         'spin-slow': 'spin 8s linear infinite',
-        marquee: 'marquee 25s linear infinite',
+        marquee: 'marquee 75s linear infinite',
       },
     },
   },

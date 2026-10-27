@@ -503,9 +503,9 @@ export default function App() {
           ))}
         </div>
 
-        {/* Mobile & Tablet: Carrossel infinito automático em loop contínuo */}
+        {/* Mobile & Tablet: Carrossel infinito 100% automático em loop contínuo */}
         <div className="lg:hidden w-full overflow-hidden select-none py-1">
-          <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
+          <div className="flex w-max animate-marquee">
             {[...PILARES, ...PILARES, ...PILARES, ...PILARES].map((item, i) => (
               <div
                 key={i}
