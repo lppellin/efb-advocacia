@@ -485,20 +485,36 @@ export default function App() {
       </section>
 
       {/* ─── BARRA DIVISÓRIA / PILARES ─── */}
-      <section id="pilares" className="py-10 lg:py-14 px-4 sm:px-8 lg:px-12 bg-dark border-y border-background/10">
-        <div className="max-w-7xl mx-auto overflow-x-auto lg:overflow-visible py-4 sm:py-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <div className="flex items-center min-w-max lg:min-w-0 lg:grid lg:grid-cols-4 gap-0 lg:gap-3">
-            {PILARES.map((item, i) => (
+      <section id="pilares" className="py-8 lg:py-14 bg-dark border-y border-background/10 overflow-hidden">
+        {/* Desktop: Grid estática com 4 colunas */}
+        <div className="hidden lg:grid lg:grid-cols-4 gap-3 max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
+          {PILARES.map((item, i) => (
+            <div
+              key={i}
+              className="stat-item flex items-center justify-center px-4 py-1 border-r border-background/10 last:border-r-0 cursor-default"
+            >
+              <div className="group flex items-center gap-2.5 lg:gap-3 transition-transform duration-300 hover:scale-105 hover:-translate-y-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0 transition-transform duration-300 group-hover:scale-150" />
+                <span className="font-mono text-xs sm:text-sm lg:text-sm font-normal uppercase tracking-[0.12em] lg:tracking-[0.16em] text-accent whitespace-nowrap transition-all duration-300 group-hover:tracking-[0.18em] lg:group-hover:tracking-[0.22em]">
+                  {item}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Mobile & Tablet: Carrossel infinito automático em loop contínuo */}
+        <div className="lg:hidden w-full overflow-hidden select-none py-1">
+          <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
+            {[...PILARES, ...PILARES, ...PILARES, ...PILARES].map((item, i) => (
               <div
                 key={i}
-                className="stat-item flex items-center justify-center px-6 lg:px-4 py-2 lg:py-1 border-r border-background/10 last:border-r-0 shrink-0 lg:shrink cursor-default"
+                className="flex items-center gap-2.5 px-6 py-1 border-r border-background/10 shrink-0"
               >
-                <div className="group flex items-center gap-2.5 lg:gap-3 transition-transform duration-300 hover:scale-105 hover:-translate-y-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0 transition-transform duration-300 group-hover:scale-150" />
-                  <span className="font-mono text-xs sm:text-sm lg:text-sm font-normal uppercase tracking-[0.12em] lg:tracking-[0.16em] text-accent whitespace-nowrap transition-all duration-300 group-hover:tracking-[0.18em] lg:group-hover:tracking-[0.22em]">
-                    {item}
-                  </span>
-                </div>
+                <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
+                <span className="font-mono text-xs sm:text-sm font-normal uppercase tracking-[0.12em] text-accent whitespace-nowrap">
+                  {item}
+                </span>
               </div>
             ))}
           </div>
