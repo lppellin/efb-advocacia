@@ -18,7 +18,6 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
     scroll-padding-top: 80px;
   }
   body {
@@ -63,4 +62,20 @@
 }
 .btn-magnetic:hover::before {
   @apply translate-y-0;
+}
+
+
+/* Subtle zoom in/out with gentle vertical float */
+@keyframes zoom-float {
+  0%, 100% {
+    transform: scale(1) translateY(0);
+  }
+  50% {
+    transform: scale(1.025) translateY(-4px);
+  }
+}
+
+.animate-zoom-float {
+  animation: zoom-float 7.5s ease-in-out infinite;
+  will-change: transform;
 }
