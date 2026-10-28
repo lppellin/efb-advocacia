@@ -35,7 +35,7 @@ const AREAS = [
     sub: 'Ramo voltado à proteção social do contribuinte perante a seguridade pública em momentos de vulnerabilidade econômica decorrentes de idade, tempo de contribuição, incapacidade ou morte. Compreende a concessão, o restabelecimento e a revisão de benefícios previdenciários e assistenciais.',
     icon: ArrowRightIcon,
     solucoes: [
-      'Aposentadoria por idade, por tempo de contribuição, especial e da pessoa com deficiência',
+      'Aposentadoria por idade, por tempo de contribuição, especial (insalubridade e periculosidade), rural e da pessoa com deficiência',
       'Planejamento Previdenciário e Revisões de Benefícios',
       'Auxílio por incapacidade temporária, incapacidade permanente e auxílio-acidente',
       'Atuação administrativa e judicial',
@@ -88,19 +88,19 @@ const TEAM = [
     name: 'Dr. Evair Francisco Bona',
     role: 'Advogado titular',
     sub: 'OAB/SC 009562',
-    description: 'Graduado em Direito pela Universidade Regional de Blumenau (FURB) no ano de 1993, aprofundou sua qualificação por meio de pós-graduações em Direito Civil e Processo Civil, exercendo a advocacia de forma autônoma e empresarial desde 1995. Especialista em Direito Previdenciário.',
+    description: 'Bacharel em Direito pela Universidade Regional de Blumenau (FURB) no ano de 1993, aprofundou sua qualificação por meio de pós-graduações em Direito Civil e Processo Civil, exercendo a advocacia de forma autônoma e empresarial desde 1995. Especialista em Direito Previdenciário.',
     img: asset('assets/foto-evair.jpeg'),
   },
   {
     name: 'Marla Lindorfer dos Reis',
     role: 'Assistente Jurídico II',
-    description: 'Graduada em Direito pela Unijuí.',
+    description: 'Bacharela em Direito pela Universidade Regional do Noroeste do Estado do Rio Grande do Sul (UNIJUÍ), com formação concluída em 2003. Atua com profissionalismo, responsabilidade e dedicação, contribuindo para o desenvolvimento das atividades jurídicas do escritório, com compromisso com a ética, a qualidade e a excelência no atendimento.',
     img: asset('assets/foto-marla.jpeg'),
   },
   {
     name: 'Ana Júlia Bona',
     role: 'Assistente Jurídico',
-    description: 'Graduanda em Direito pela PUCPR',
+    description: 'Graduanda do 10º período de Direito na Pontifícia Universidade Católica do Paraná (PUCPR) e aprovada no 45º Exame de Ordem da OAB. Possui interesse de atuação nas áreas de Direito de Família e Sucessões, somando sólida experiência prática acumulada no Ministério Público do Estado do Paraná e no TJPR. Destaca-se pela ampla vivência na elaboração de peças processuais e acompanhamento nos sistemas Projudi e Eproc.',
     img: asset('assets/foto-ana.png'),
   },
 ];
@@ -327,9 +327,8 @@ export default function App() {
 
         {/* Menu Mobile & Tablet Expansível */}
         <div
-          className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-            mobileMenuOpen ? 'max-h-96 opacity-100 mt-4 pt-4 border-t border-background/10' : 'max-h-0 opacity-0 pointer-events-none'
-          }`}
+          className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-96 opacity-100 mt-4 pt-4 border-t border-background/10' : 'max-h-0 opacity-0 pointer-events-none'
+            }`}
         >
           <div className="flex flex-col gap-3.5 text-base font-medium text-background/90 pb-2">
             <a
@@ -623,7 +622,7 @@ export default function App() {
                 </div>
 
                 {/* Formação / Descrição */}
-                <p className="text-primary/75 text-xs sm:text-sm leading-relaxed text-justify indent-6">
+                <p className="text-primary/75 text-xs sm:text-sm leading-relaxed text-left indent-6">
                   {member.description}
                 </p>
               </div>
