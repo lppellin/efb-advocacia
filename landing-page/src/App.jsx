@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight, Phone, Mail, MapPin, CheckCircle2, Menu, X } from 'lucide-react';
 import { ArrowRightIcon } from '@phosphor-icons/react';
 import TermosEPrivacidade from './pages/TermosEPrivacidade';
+import { trackEvent } from './analytics';
 
 // ── Ícones de redes sociais como SVG inline (lucide-react v1.24 removeu esses) ──
 const IconInstagram = ({ className }) => (
@@ -94,13 +95,13 @@ const TEAM = [
   {
     name: 'Marla Lindorfer dos Reis',
     role: 'Assistente Jurídico II',
-    description: 'Bacharela em Direito pela Universidade Regional do Noroeste do Estado do Rio Grande do Sul (UNIJUÍ), com formação concluída em 2003. Atua com profissionalismo, responsabilidade e dedicação, contribuindo para o desenvolvimento das atividades jurídicas do escritório, com compromisso com a ética, a qualidade e a excelência no atendimento.',
+    description: 'Bacharela em Direito pela Universidade Regional do Noroeste do Estado do Rio Grande do Sul (UNIJUÍ), com formação concluída em 2003. Atua com profissionalismo, responsabilidade e dedicação, destacando o compromisso com a ética, a qualidade e a excelência no atendimento.',
     img: asset('assets/foto-marla.jpeg'),
   },
   {
     name: 'Ana Júlia Bona',
     role: 'Assistente Jurídico',
-    description: 'Graduanda do 10º período de Direito na Pontifícia Universidade Católica do Paraná (PUCPR) e aprovada no 45º Exame de Ordem da OAB. Possui interesse de atuação nas áreas de Direito de Família e Sucessões, somando sólida experiência prática acumulada no Ministério Público do Estado do Paraná e no TJPR. Destaca-se pela ampla vivência na elaboração de peças processuais e acompanhamento nos sistemas Projudi e Eproc.',
+    description: 'Graduanda do 10º período de Direito na Pontifícia Universidade Católica do Paraná (PUCPR) e aprovada no 45º Exame de Ordem da OAB. Possui interesse de atuação nas áreas de Direito de Família e Sucessões.',
     img: asset('assets/foto-ana.png'),
   },
 ];
@@ -289,6 +290,7 @@ export default function App() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Fale conosco pelo WhatsApp"
+        onClick={() => trackEvent('click_whatsapp', { location: 'floating_button' })}
         className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-[#25D366] text-white rounded-full shadow-[0_4px_20px_rgba(37,211,102,0.45)] hover:shadow-[0_6px_28px_rgba(37,211,102,0.65)] hover:scale-110 active:scale-95 transition-all duration-300"
       >
         <IconWhatsapp className="w-8 h-8 sm:w-9 sm:h-9 fill-current" />
@@ -309,6 +311,7 @@ export default function App() {
           {/* Botão Contato Direto */}
           <a
             href="#contato"
+            onClick={() => trackEvent('click_cta_contact', { location: 'navbar_desktop' })}
             className="btn-magnetic hidden lg:flex items-center gap-2 px-6 py-2.5 bg-accent text-dark text-sm font-semibold rounded-full hover:bg-accent-hover transition-all duration-300"
           >
             Contate-nos!
@@ -361,7 +364,10 @@ export default function App() {
             </a>
             <a
               href="#contato"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={() => {
+                setMobileMenuOpen(false);
+                trackEvent('click_cta_contact', { location: 'navbar_mobile' });
+              }}
               className="mt-2 text-center py-2.5 px-6 bg-accent text-dark text-sm font-semibold rounded-full hover:bg-accent-hover transition-all"
             >
               Contate-nos!
@@ -569,6 +575,7 @@ export default function App() {
                     href={WHATSAPP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => trackEvent('click_whatsapp', { location: 'areas_atuacao', area: area.title })}
                     className="inline-flex items-center gap-2 text-dark font-semibold text-sm border-b-2 border-accent pb-1 hover:text-accent hover:scale-105 transition-all duration-300 origin-left w-fit"
                   >
                     Consultar sobre este serviço <ArrowRight className="w-4 h-4" />
@@ -663,10 +670,10 @@ export default function App() {
 
               <div className="flex flex-col gap-3">
                 {[
-                  { icon: Phone, label: 'Telefone', value: '(47) 3308-1340', href: 'tel:+554733081340' },
-                  { icon: IconWhatsapp, label: 'WhatsApp', value: '(47) 99180-1340', href: WHATSAPP_URL, target: '_blank', rel: 'noopener noreferrer' },
-                  { icon: Mail, label: 'E-mail', value: 'evairbona.adv@gmail.com', href: 'mailto:evairbona.adv@gmail.com' },
-                  { icon: MapPin, label: 'Endereço', value: 'Rua Estados Unidos, nº 35 - Sala 103, 1º andar - Imigrantes, Timbó/SC - CEP 89090-084', href: 'https://maps.app.goo.gl/nBcrM5dJ9DXHvjUQ8', target: '_blank', rel: 'noopener noreferrer' },
+                  { icon: Phone, label: 'Telefone', value: '(47) 3308-1340', href: 'tel:+554733081340', eventName: 'click_phone' },
+                  { icon: IconWhatsapp, label: 'WhatsApp', value: '(47) 99180-1340', href: WHATSAPP_URL, target: '_blank', rel: 'noopener noreferrer', eventName: 'click_whatsapp' },
+                  { icon: Mail, label: 'E-mail', value: 'evairbona.adv@gmail.com', href: 'mailto:evairbona.adv@gmail.com', eventName: 'click_email' },
+                  { icon: MapPin, label: 'Endereço', value: 'Rua Estados Unidos, nº 35 - Sala 103, 1º andar - Imigrantes, Timbó/SC - CEP 89090-084', href: 'https://maps.app.goo.gl/nBcrM5dJ9DXHvjUQ8', target: '_blank', rel: 'noopener noreferrer', eventName: 'click_maps' },
                 ].map((item, i) => {
                   const Icon = item.icon;
                   return (
@@ -675,6 +682,7 @@ export default function App() {
                       href={item.href}
                       target={item.target}
                       rel={item.rel}
+                      onClick={() => trackEvent(item.eventName, { location: 'contact_section' })}
                       className="group flex gap-3.5 items-start hover:text-accent transition-colors duration-200"
                     >
                       <div className="w-9 h-9 rounded-full border border-dark/20 flex items-center justify-center transition-all duration-300 group-hover:bg-dark group-hover:border-dark group-hover:scale-105 shrink-0">
@@ -733,6 +741,7 @@ export default function App() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
+                    onClick={() => trackEvent(label === 'WhatsApp' ? 'click_whatsapp' : 'click_social', { network: label, location: 'footer' })}
                     className="w-8 h-8 rounded-full bg-background/5 border border-background/10 flex items-center justify-center hover:bg-accent hover:border-accent transition-all duration-300 group"
                   >
                     <Icon className="w-3.5 h-3.5 text-background/60 group-hover:text-dark transition-colors" />
