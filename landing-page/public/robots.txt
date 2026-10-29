@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap do site (atualize o domínio após a compra)
+Sitemap: https://www.efbadvocacia.com.br/sitemap.xml
