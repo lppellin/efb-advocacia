@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight, Phone, Mail, MapPin, CheckCircle2, Menu, X } from 'lucide-react';
-import { ArrowRightIcon } from '@phosphor-icons/react';
 import TermosEPrivacidade from './pages/TermosEPrivacidade';
 import { trackEvent } from './analytics';
 
@@ -34,7 +33,7 @@ const AREAS = [
   {
     title: 'Direito Previdenciário',
     sub: 'Ramo voltado à proteção social do contribuinte perante a seguridade pública em momentos de vulnerabilidade econômica decorrentes de idade, tempo de contribuição, incapacidade ou morte. Compreende a concessão, o restabelecimento e a revisão de benefícios previdenciários e assistenciais.',
-    icon: ArrowRightIcon,
+    icon: ArrowRight,
     solucoes: [
       'Aposentadoria por idade, por tempo de contribuição, especial (insalubridade e periculosidade), rural e da pessoa com deficiência',
       'Planejamento Previdenciário e Revisões de Benefícios',
@@ -46,7 +45,7 @@ const AREAS = [
   {
     title: 'Família e Sucessões',
     sub: 'Abrange as relações jurídicas, pessoais e patrimoniais originadas dos vínculos familiares e da transmissão de bens pós-morte.',
-    icon: ArrowRightIcon,
+    icon: ArrowRight,
     solucoes: [
       'Divórcio consensual ou litigioso',
       'Inventário extrajudicial e judicial para partilha de bens',
@@ -58,7 +57,7 @@ const AREAS = [
   {
     title: 'Direito Civil e Processo Civil',
     sub: 'Organiza as relações pessoais e patrimoniais do dia a dia. Seu conceito engloba toda a dinâmica da vida privada, sendo a base da convivência em sociedade.',
-    icon: ArrowRightIcon,
+    icon: ArrowRight,
     solucoes: [
       'Responsabilidade Civil (Ações de indenização por Danos Materiais e Morais)',
       'Elaboração de contratos',
@@ -70,7 +69,7 @@ const AREAS = [
   {
     title: 'Direito Trabalhista',
     sub: 'Disciplina os vínculos de emprego e as relações de trabalho entre colaboradores e empregadores, garantindo a aplicação das normas tutelares e das convenções coletivas.',
-    icon: ArrowRightIcon,
+    icon: ArrowRight,
     solucoes: [
       'Horas extras, intervalos não concedidos e adicionais de insalubridade/periculosidade',
       'Indenização por Acidente de Trabalho, assédio moral e doenças ocupacionais',
@@ -544,7 +543,7 @@ export default function App() {
                   className="reveal-section bg-background border border-dark/15 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 shadow-md hover:shadow-lg hover:scale-[1.01] lg:hover:scale-[1.02] transition-[transform,box-shadow] duration-300"
                 >
                   <div className="flex items-center gap-3.5 mb-4">
-                    <Icon className="w-6 h-6 text-dark shrink-0" weight="bold" />
+                    <Icon className="w-6 h-6 text-dark shrink-0" strokeWidth={2.25} />
                     <h3 className="font-serif text-xl sm:text-2xl lg:text-3xl font-bold text-dark">
                       {area.title}
                     </h3>
